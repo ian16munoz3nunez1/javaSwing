@@ -113,8 +113,6 @@ public class MainWindow extends JFrame implements ActionListener {
             int numero1 = (int)jsNumero1.getValue();
             int numero2 = (int)jsNumero2.getValue();
             jlResultado.setText("Resultado: " + (numero1+numero2));
-            System.out.println(this.getHeight());
-            System.out.println(this.getWidth());
         }
     }
 
