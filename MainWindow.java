@@ -14,7 +14,7 @@ import javax.swing.JButton;
 
 public class MainWindow extends JFrame implements ActionListener {
     public MainWindow() {
-        this.setTitle("Suma de numeros");
+        this.setTitle("Area de un triangulo");
         this.setMinimumSize(new Dimension(300, 300));
         this.setLocationRelativeTo(null);
 
@@ -24,22 +24,27 @@ public class MainWindow extends JFrame implements ActionListener {
 
     private void init() {
         jpanel = new JPanel();
-        jlLado = new JLabel();
-        jlResultado = new JLabel();
-        jsLado = new JSpinner();
-        jbSuma = new JButton();
+        jlBase = new JLabel();
+        jlAltura = new JLabel();
+        jlArea = new JLabel();
+        jsBase = new JSpinner();
+        jsAltura = new JSpinner();
+        jbArea = new JButton();
 
-        jlLado.setText("Medida del lado:");
-        jlLado.setHorizontalAlignment(SwingConstants.CENTER);
+        jlBase.setText("Base:");
+        jlBase.setHorizontalAlignment(SwingConstants.CENTER);
+        jlAltura.setText("Altura:");
+        jlAltura.setHorizontalAlignment(SwingConstants.CENTER);
+        jlArea.setText("Resultado:");
+        jlArea.setHorizontalAlignment(SwingConstants.CENTER);
 
-        jsLado.setModel(new SpinnerNumberModel(0.0f, 0.0f, 500.0f, 0.1f));
-        jsLado.setValue(0.0f);
+        jsBase.setModel(new SpinnerNumberModel(0.0f, 0.0f, 500.0f, 0.1f));
+        jsBase.setValue(0.0f);
+        jsAltura.setModel(new SpinnerNumberModel(0.0f, 0.0f, 500.0f, 0.1f));
+        jsAltura.setValue(0.0f);
 
-        jlResultado.setText("Area:");
-        jlResultado.setHorizontalAlignment(SwingConstants.CENTER);
-
-        jbSuma.setText("Calcular area");
-        jbSuma.addActionListener(this);
+        jbArea.setText("Calcular area");
+        jbArea.addActionListener(this);
 
         GroupLayout jpanelLayout = new GroupLayout(jpanel);
         jpanel.setLayout(jpanelLayout);
@@ -48,12 +53,17 @@ public class MainWindow extends JFrame implements ActionListener {
             .addGroup(jpanelLayout.createSequentialGroup()
                 .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jpanelLayout.createParallelGroup(Alignment.TRAILING)
-                    .addComponent(jbSuma, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jlResultado, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jbArea, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jlArea, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(Alignment.LEADING, jpanelLayout.createSequentialGroup()
-                        .addComponent(jlLado, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jlBase, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGap(18, 18, Short.MAX_VALUE)
-                        .addComponent(jsLado)
+                        .addComponent(jsBase)
+                    )
+                    .addGroup(Alignment.LEADING, jpanelLayout.createSequentialGroup()
+                        .addComponent(jlAltura, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(18, 18, Short.MAX_VALUE)
+                        .addComponent(jsAltura)
                     )
                 )
                 .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -64,13 +74,18 @@ public class MainWindow extends JFrame implements ActionListener {
             .addGroup(jpanelLayout.createSequentialGroup()
                 .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jpanelLayout.createParallelGroup(Alignment.BASELINE)
-                    .addComponent(jlLado)
-                    .addComponent(jsLado)
+                    .addComponent(jlBase)
+                    .addComponent(jsBase)
                 )
                 .addGap(18, 18, Short.MAX_VALUE)
-                .addComponent(jbSuma)
+                .addGroup(jpanelLayout.createParallelGroup(Alignment.BASELINE)
+                    .addComponent(jlAltura)
+                    .addComponent(jsAltura)
+                )
                 .addGap(18, 18, Short.MAX_VALUE)
-                .addComponent(jlResultado)
+                .addComponent(jbArea)
+                .addGap(18, 18, Short.MAX_VALUE)
+                .addComponent(jlArea)
                 .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             )
         );
@@ -98,17 +113,20 @@ public class MainWindow extends JFrame implements ActionListener {
     }
 
     public void actionPerformed(ActionEvent e) {
-        if(e.getSource() == jbSuma) {
-            double lado = (double)jsLado.getValue();
-            double area = lado * lado;
-            jlResultado.setText("Resultado: " + area);
+        if(e.getSource() == jbArea) {
+            double base = (double)jsBase.getValue();
+            double altura = (double)jsAltura.getValue();
+            double area = (base*altura)/2;
+            jlArea.setText("Area: " + area);
         }
     }
 
     private JPanel jpanel;
-    private JLabel jlLado;
-    private JLabel jlResultado;
-    private JSpinner jsLado;
-    private JButton jbSuma;
+    private JLabel jlBase;
+    private JLabel jlAltura;
+    private JLabel jlArea;
+    private JSpinner jsBase;
+    private JSpinner jsAltura;
+    private JButton jbArea;
 }
 
