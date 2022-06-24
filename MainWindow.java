@@ -14,7 +14,7 @@ import javax.swing.JButton;
 
 public class MainWindow extends JFrame implements ActionListener {
     public MainWindow() {
-        this.setTitle("Area de un triangulo");
+        this.setTitle("Area de un circulo");
         this.setMinimumSize(new Dimension(300, 300));
         this.setLocationRelativeTo(null);
 
@@ -24,24 +24,18 @@ public class MainWindow extends JFrame implements ActionListener {
 
     private void init() {
         jpanel = new JPanel();
-        jlBase = new JLabel();
-        jlAltura = new JLabel();
+        jlRadio = new JLabel();
         jlArea = new JLabel();
-        jsBase = new JSpinner();
-        jsAltura = new JSpinner();
+        jsRadio = new JSpinner();
         jbArea = new JButton();
 
-        jlBase.setText("Base:");
-        jlBase.setHorizontalAlignment(SwingConstants.CENTER);
-        jlAltura.setText("Altura:");
-        jlAltura.setHorizontalAlignment(SwingConstants.CENTER);
-        jlArea.setText("Resultado:");
+        jlRadio.setText("Radio:");
+        jlRadio.setHorizontalAlignment(SwingConstants.CENTER);
+        jlArea.setText("Area:");
         jlArea.setHorizontalAlignment(SwingConstants.CENTER);
 
-        jsBase.setModel(new SpinnerNumberModel(0.0f, 0.0f, 500.0f, 0.1f));
-        jsBase.setValue(0.0f);
-        jsAltura.setModel(new SpinnerNumberModel(0.0f, 0.0f, 500.0f, 0.1f));
-        jsAltura.setValue(0.0f);
+        jsRadio.setModel(new SpinnerNumberModel(0.0f, 0.0f, 500.0f, 0.1f));
+        jsRadio.setValue(0.0f);
 
         jbArea.setText("Calcular area");
         jbArea.addActionListener(this);
@@ -56,14 +50,9 @@ public class MainWindow extends JFrame implements ActionListener {
                     .addComponent(jbArea, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jlArea, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(Alignment.LEADING, jpanelLayout.createSequentialGroup()
-                        .addComponent(jlBase, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jlRadio, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGap(18, 18, Short.MAX_VALUE)
-                        .addComponent(jsBase)
-                    )
-                    .addGroup(Alignment.LEADING, jpanelLayout.createSequentialGroup()
-                        .addComponent(jlAltura, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(18, 18, Short.MAX_VALUE)
-                        .addComponent(jsAltura)
+                        .addComponent(jsRadio)
                     )
                 )
                 .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -74,13 +63,8 @@ public class MainWindow extends JFrame implements ActionListener {
             .addGroup(jpanelLayout.createSequentialGroup()
                 .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jpanelLayout.createParallelGroup(Alignment.BASELINE)
-                    .addComponent(jlBase)
-                    .addComponent(jsBase)
-                )
-                .addGap(18, 18, Short.MAX_VALUE)
-                .addGroup(jpanelLayout.createParallelGroup(Alignment.BASELINE)
-                    .addComponent(jlAltura)
-                    .addComponent(jsAltura)
+                    .addComponent(jlRadio)
+                    .addComponent(jsRadio)
                 )
                 .addGap(18, 18, Short.MAX_VALUE)
                 .addComponent(jbArea)
@@ -114,19 +98,16 @@ public class MainWindow extends JFrame implements ActionListener {
 
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == jbArea) {
-            double base = (double)jsBase.getValue();
-            double altura = (double)jsAltura.getValue();
-            double area = (base*altura)/2;
+            double radio = (double)jsRadio.getValue();
+            double area = Math.PI * radio * radio;
             jlArea.setText("Area: " + area);
         }
     }
 
     private JPanel jpanel;
-    private JLabel jlBase;
-    private JLabel jlAltura;
+    private JLabel jlRadio;
     private JLabel jlArea;
-    private JSpinner jsBase;
-    private JSpinner jsAltura;
+    private JSpinner jsRadio;
     private JButton jbArea;
 }
 
