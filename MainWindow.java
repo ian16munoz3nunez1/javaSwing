@@ -9,6 +9,7 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.JSpinner;
+import javax.swing.SpinnerNumberModel;
 import javax.swing.JButton;
 
 public class MainWindow extends JFrame implements ActionListener {
@@ -23,23 +24,21 @@ public class MainWindow extends JFrame implements ActionListener {
 
     private void init() {
         jpanel = new JPanel();
-        jlNumero1 = new JLabel();
-        jlNumero2 = new JLabel();
+        jlLado = new JLabel();
         jlResultado = new JLabel();
-        jsNumero1 = new JSpinner();
-        jsNumero2 = new JSpinner();
+        jsLado = new JSpinner();
         jbSuma = new JButton();
 
-        jlNumero1.setText("Numero 1:");
-        jlNumero1.setHorizontalAlignment(SwingConstants.CENTER);
+        jlLado.setText("Medida del lado:");
+        jlLado.setHorizontalAlignment(SwingConstants.CENTER);
 
-        jlNumero2.setText("Numero 2:");
-        jlNumero2.setHorizontalAlignment(SwingConstants.CENTER);
+        jsLado.setModel(new SpinnerNumberModel(0.0f, 0.0f, 500.0f, 0.1f));
+        jsLado.setValue(0.0f);
 
-        jlResultado.setText("Resultado:");
+        jlResultado.setText("Area:");
         jlResultado.setHorizontalAlignment(SwingConstants.CENTER);
 
-        jbSuma.setText("Sumar");
+        jbSuma.setText("Calcular area");
         jbSuma.addActionListener(this);
 
         GroupLayout jpanelLayout = new GroupLayout(jpanel);
@@ -52,14 +51,9 @@ public class MainWindow extends JFrame implements ActionListener {
                     .addComponent(jbSuma, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jlResultado, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(Alignment.LEADING, jpanelLayout.createSequentialGroup()
-                        .addComponent(jlNumero1, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jlLado, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGap(18, 18, Short.MAX_VALUE)
-                        .addComponent(jsNumero1)
-                    )
-                    .addGroup(Alignment.LEADING, jpanelLayout.createSequentialGroup()
-                        .addComponent(jlNumero2, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(18, 18, Short.MAX_VALUE)
-                        .addComponent(jsNumero2)
+                        .addComponent(jsLado)
                     )
                 )
                 .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -70,13 +64,8 @@ public class MainWindow extends JFrame implements ActionListener {
             .addGroup(jpanelLayout.createSequentialGroup()
                 .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jpanelLayout.createParallelGroup(Alignment.BASELINE)
-                    .addComponent(jlNumero1)
-                    .addComponent(jsNumero1)
-                )
-                .addGap(18, 18, Short.MAX_VALUE)
-                .addGroup(jpanelLayout.createParallelGroup(Alignment.BASELINE)
-                    .addComponent(jlNumero2)
-                    .addComponent(jsNumero2)
+                    .addComponent(jlLado)
+                    .addComponent(jsLado)
                 )
                 .addGap(18, 18, Short.MAX_VALUE)
                 .addComponent(jbSuma)
@@ -110,18 +99,16 @@ public class MainWindow extends JFrame implements ActionListener {
 
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == jbSuma) {
-            int numero1 = (int)jsNumero1.getValue();
-            int numero2 = (int)jsNumero2.getValue();
-            jlResultado.setText("Resultado: " + (numero1+numero2));
+            double lado = (double)jsLado.getValue();
+            double area = lado * lado;
+            jlResultado.setText("Resultado: " + area);
         }
     }
 
     private JPanel jpanel;
-    private JLabel jlNumero1;
-    private JLabel jlNumero2;
+    private JLabel jlLado;
     private JLabel jlResultado;
-    private JSpinner jsNumero1;
-    private JSpinner jsNumero2;
+    private JSpinner jsLado;
     private JButton jbSuma;
 }
 
